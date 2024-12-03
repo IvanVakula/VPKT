@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Мои курсы</h2>
+<div class="list-group">
+    {% for course in courses %}
+    <a href="{{ url_for('course_grades', course_id=course.id) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ course.name }}</h5>
+            <small>Семестр {{ course.semester }}</small>
+        </div>
+        <p class="mb-1">Год: {{ course.year }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

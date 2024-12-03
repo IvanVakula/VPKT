@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ course.name }} - Выставление оценок</h2>
+
+<form method="GET" class="mb-4">
+    <div class="row align-items-end">
+        <div class="col-md-6">
+            <label for="group_id" class="form-label">Выберите группу:</label>
+            {{ selected_group_id }}
+            <select name="group_id" id="group_id" class="form-select" onchange="this.form.submit()">
+                <option value="">-- Выберите группу --</option>
+                {% for group in groups %}
+                <option value="{{ group.id }}" {% if group_id and group_id == group.id %}selected{% endif %}>
+                    {{ group.group_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</form>
+
+{% if students %}
+<form method="POST">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Оценка</th>
+                    <!--- <th>Статус</th> !--->
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.full_name }}</td>
+                    <td>
+                        <select name="grade_{{ student.id }}" class="form-select" {% if student.grade and student.grade.is_signed %}disabled{% endif %}>
+                            <option value="0">Не выставлена</option>
+                            {% for grade in range(2, 6) %}
+                            <option value="{{ grade }}" {% if student.grade and student.grade.grade == grade %}selected{% endif %}>
+                                {{ grade }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                <!---
+                    <td>
+                        {% if student.grade %}
+                            {% if student.grade.is_signed %}
+                                <span class="badge bg-success">Подписано</span>
+                            {% else %}
+                                <span class="badge bg-warning">Не подписано</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="badge bg-secondary">Нет оценки</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                !--->
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Сохранить оценки</button>
+    </div>
+</form>
+{% elif selected_group_id %}
+<div class="alert alert-info">
+    В выбранной группе нет студентов
+</div>
+{% endif %}
+{% endblock %}
