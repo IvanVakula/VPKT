@@ -13,6 +13,10 @@ app.config.from_object(Config)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+login_manager.login_message = "Пожалуйста, авторизуйтесь для доступа к этой странице."
+login_manager.login_message_category = "info"
+login_manager.needs_refresh_message = "Пожалуйста, авторизуйтесь повторно для доступа к этой странице."
+login_manager.needs_refresh_message_category = "info"
 
 db.init_app(app)
 with app.app_context():
