@@ -1,0 +1,20 @@
+output-format: text
+
+strictness: medium
+test-warnings: true
+doc-warnings: false
+
+ignore-paths:
+  - docs
+  - tests
+  - venv
+
+uses:
+  - flask
+  - celery
+
+bandit:
+  run: true
+
+dodgy:
+  run: true

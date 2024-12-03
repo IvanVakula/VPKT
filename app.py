@@ -30,9 +30,8 @@ def index():
     if current_user.is_teacher:
         courses = Course.query.filter_by(teacher_id=current_user.id).all()
         return render_template('teacher_dashboard.html', courses=courses)
-    else:
-        grades = Grade.query.filter_by(student_id=current_user.id).join(Course).all()
-        return render_template('student_dashboard.html', grades=grades)
+    grades = Grade.query.filter_by(student_id=current_user.id).join(Course).all()
+    return render_template('student_dashboard.html', grades=grades)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -118,4 +117,3 @@ def course_grades(course_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
