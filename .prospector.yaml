@@ -13,6 +13,10 @@ uses:
   - flask
   - celery
 
+pylint:
+  disable:
+    - import-error
+
 bandit:
   run: true
 
