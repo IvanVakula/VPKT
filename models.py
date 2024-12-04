@@ -79,9 +79,8 @@ class Grade(db.Model):
     course = db.relationship('Course', back_populates='grades')
     signed_by = db.relationship('User', foreign_keys=[signed_by_id], back_populates='grades_signed')
 
-    # оценка не может быть меньше 1 или больше 5
     @validates('grade')
     def validate_grade(self, key, grade):
-        if key and not 1 <= grade <= 5:
-            raise ValueError("Grade must be between 1 and 5")
+        if key and not 1 <= grade <= 3:
+            raise ValueError("Оценка должна быть не меньше 1 и не больше 5")
         return grade
