@@ -82,6 +82,6 @@ class Grade(db.Model):
 
     @validates('grade')
     def validate_grade(self, key, grade):
-        if key and not 1 <= grade <= 3:
+        if key and not 1 <= grade <= 5:
             raise ValueError("Оценка должна быть не меньше 1 и не больше 5")
         return grade
