@@ -1,5 +1,5 @@
 SQLAlchemy~=2.0.36
-flask~=3.1.0
+flask~=3.0.3
 flask-login~=0.6.3
 flask-sqlalchemy~=3.1.1
 werkzeug~=3.1.3
@@ -7,3 +7,4 @@ python-dotenv~=1.0.1
 mysql-connector-python~=9.1.0
 prospector[with_bandit]~=1.13.3
 prospector2html~=2.0.0
+pytest~=8.3.4
