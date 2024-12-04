@@ -1,6 +1,5 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import CheckConstraint
 from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
@@ -83,6 +82,6 @@ class Grade(db.Model):
     # оценка не может быть меньше 1 или больше 5
     @validates('grade')
     def validate_grade(self, key, grade):
-        if not 1 <= grade <= 5:
+        if key and not 1 <= grade <= 5:
             raise ValueError("Grade must be between 1 and 5")
         return grade
