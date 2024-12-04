@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import CheckConstraint
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -77,3 +79,10 @@ class Grade(db.Model):
     student = db.relationship('User', foreign_keys=[student_id], back_populates='grades_received')
     course = db.relationship('Course', back_populates='grades')
     signed_by = db.relationship('User', foreign_keys=[signed_by_id], back_populates='grades_signed')
+
+    # оценка не может быть меньше 1 или больше 5
+    @validates('grade')
+    def validate_grade(self, key, grade):
+        if not 1 <= grade <= 5:
+            raise ValueError("Grade must be between 1 and 5")
+        return grade
