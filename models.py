@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(20), nullable=False)
     full_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(255), nullable=True)
 
     taught_courses = db.relationship('Course', back_populates='teacher')
     grades_received = db.relationship('Grade',
