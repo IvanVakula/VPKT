@@ -34,9 +34,9 @@ def load_user(user_id):
 def index():
     if current_user.is_teacher:
         courses = Course.query.filter_by(teacher_id=current_user.id).all()
-        return render_template('teacher_dashboard.html', courses=courses)
+        return render_template('teacher_dashboard.html', courses=courses, user=current_user)
     grades = Grade.query.filter_by(student_id=current_user.id).join(Course).all()
-    return render_template('student_dashboard.html', grades=grades)
+    return render_template('student_dashboard.html', grades=grades, user=current_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])

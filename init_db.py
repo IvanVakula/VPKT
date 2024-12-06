@@ -10,7 +10,8 @@ def create_test_data():
             username='teacher',
             password=generate_password_hash('teacher'),
             role='teacher',
-            full_name='Иванов Иван Иванович'
+            full_name='Иванов Иван Иванович',
+            email='teacher@example.com'
         )
         db.session.add(teacher)
 
@@ -20,7 +21,8 @@ def create_test_data():
                 username=f'student{i}',
                 password=generate_password_hash(f'student{i}'),
                 role='student',
-                full_name=f'Студент {i}'
+                full_name=f'Студент {i}',
+                email=f'student{i}@example.com'
             )
             students.append(student)
             db.session.add(student)
