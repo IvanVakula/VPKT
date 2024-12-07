@@ -20,8 +20,8 @@ login_manager.needs_refresh_message = "Пожалуйста, авторизуй�
 login_manager.needs_refresh_message_category = "info"
 
 db.init_app(app)
-with app.app_context():
-    db.create_all()
+#with app.app_context():
+#    db.create_all()
 
 
 @login_manager.user_loader
